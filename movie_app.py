@@ -131,7 +131,7 @@ class MovieApp:
     def _command_movies_sorted_by_rating(self):
         """Displays Movies sorted from most rated to less rated"""
         movies = self._storage.list_movies()
-        ratings = [movies[movie]["rating"] for movie in movies]
+        ratings = list({movies[movie]["rating"] for movie in movies})
         ratings.sort(reverse=True)
         for rating in ratings:
             for movie in get_movies_based_on_rating(rating, movies):
