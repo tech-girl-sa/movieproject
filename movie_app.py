@@ -39,6 +39,7 @@ class MovieApp:
 
 
     def _command_list_movies(self):
+        """Lists all movies"""
         movies = self._storage.list_movies()
         print(f"{len(movies.keys())} movies in total")
         for movie in movies:
@@ -46,6 +47,7 @@ class MovieApp:
 
 
     def _command_add_movie(self):
+        """Adds a new movie if it doesn't exist already with proper input validation"""
         movies = self._storage.list_movies()
         movie = ""
         while not movie or movie in movies:
@@ -61,6 +63,7 @@ class MovieApp:
 
 
     def _command_delete_movie(self):
+        """Deletes entered movie if it exists with auto correct support in case of typo in name of the film"""
         movies = self._storage.list_movies()
         movie = input("Enter Movie name to delete: ")
         if movie in movies:
@@ -74,6 +77,7 @@ class MovieApp:
 
 
     def _command_update_movie(self):
+        """Updates entered movie if it exists with auto correct support in case of typo in name of the film"""
         movies = self._storage.list_movies()
         movie = input("Enter the movie's name: ")
         if movie not in movies:
@@ -88,6 +92,7 @@ class MovieApp:
 
 
     def _command_movie_stats(self):
+        """Displays average ratings, Median of the ratings, Best rated movie and Worst rated movie"""
         movies = self._storage.list_movies()
         ratings = [movies[movie]["rating"] for movie in movies]
         average = get_average(ratings)
@@ -100,12 +105,14 @@ class MovieApp:
         print(f"Worst movie: {worst_movies}")
 
     def _command_random_movie(self):
+        """Selects a random movie and displays it to the user"""
         movies = self._storage.list_movies()
         random_movie = random.choice(list(movies.keys()))
         print(f"Your movie tonight: {random_movie}, it's rated {movies[random_movie]['rating']}")
 
 
     def _command_search_movie(self):
+        """Search if movie exits and supports auto-correct suggestions in case of typo made by the user"""
         movies = self._storage.list_movies()
         searched_movie = input("Enter part of movie: ")
         no_movie = True
@@ -122,6 +129,7 @@ class MovieApp:
                 print(suggestion[0])
 
     def _command_movies_sorted_by_rating(self):
+        """Displays Movies sorted from most rated to less rated"""
         movies = self._storage.list_movies()
         ratings = [movies[movie]["rating"] for movie in movies]
         ratings.sort(reverse=True)
@@ -131,6 +139,9 @@ class MovieApp:
 
 
     def _command_create_rating_histogram(self):
+        """Creates a file containing histogram of the rating. File's name can be chosen by the user himself
+           without the extension.
+        """
         movies = self._storage.list_movies()
         ratings = [movies[movie]["rating"] for movie in movies]
         file_name = input("Enter the name of file you want to save to: ")
@@ -142,6 +153,9 @@ class MovieApp:
 
 
     def _command_filter_movies(self):
+        """Filters the movies based on minimum rating, start year, and end year and displays all
+            movies in the chosen ranges. Entering empty string for a criteria will not set it.
+        """
         minimum_rating = input_rating("Enter minimum rating (leave blank for no minimum rating): ", allow_blank=True)
         start_year = input_year("Enter start year (leave blank for no start year): ", allow_blank=True)
         end_year = input_year("Enter end year (leave blank for no end year): ", allow_blank=True)
@@ -159,6 +173,7 @@ class MovieApp:
             print(f"{movie} ({rating}): {year}")
 
     def _exit(self):
+        """Prints exit message before ending the program"""
         print("Bye!")
 
     def _generate_website(self):
