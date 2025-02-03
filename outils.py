@@ -25,6 +25,17 @@ def input_year(prompt_message="Enter the movie's year: ", allow_blank = False):
         except ValueError:
             print(f"Year {year} is not valid.")
 
+def input_data_manual_entry():
+    while True:
+        user_input = input("We couldn't fetch year and rating of the movie automatically."
+                           "if you are sre you entered the right movie name and want to continue "
+                           "entering those values manually press Y else press N to cancel adding the movie.")
+        if user_input.lower() in ["y", "n"]:
+            return user_input.lower()
+        else:
+            print("Invalid Input")
+
+
 def get_fuzz_suggestions(movie,movies):
     list_movies = list(movies.keys())
     suggestions=process.extract(movie,list_movies)
