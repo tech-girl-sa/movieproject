@@ -1,0 +1,78 @@
+from istorage import IStorage
+import csv
+
+
+class StorageCsv(IStorage):
+
+    def __init__(self, file_path):
+        self.file_path = file_path
+
+
+    def map_to_read(self, list_dicts):
+        mapped_data = {
+            movie["Title"]: {
+                "rating": movie["Rating"],
+                "year": movie["Year"]
+            } for movie in list_dicts
+        }
+        return mapped_data
+
+
+    def map_to_write(self, dict_dicts):
+        mapped_data = [{"Title": movie, "Rating": dict_dicts[movie]["rating"], "Year": dict_dicts[movie]["year"]}
+                       for movie in dict_dicts
+                       ]
+        return mapped_data
+
+
+    def write_movies(self, movies):
+        mapped_data = self.map_to_write(movies)
+        with open(self.file_path, 'w', newline='') as csvfile:
+            fieldnames = ['Title', 'Rating', 'Year']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(mapped_data)
+
+    def list_movies(self):
+        """
+        Returns a dictionary of dictionaries that
+        contains the movies information in the database.
+
+        For example, the function may return:
+        {
+          "Titanic": {
+            "rating": 9,
+            "year": 1999
+          },
+          "..." {
+            ...
+          },
+        }
+        """
+        with open(self.file_path, "r") as file:
+            movies = list(csv.DictReader(file))
+        mapped_data = self.map_to_read(movies)
+        return mapped_data
+
+
+    def add_movie(self, title, year, rating, poster=""):
+        movies = self.list_movies()
+        movies[title] = {
+            "rating": rating,
+            "year": year
+        }
+        self.write_movies(movies)
+
+
+    def delete_movie(self, title):
+        movies = self.list_movies()
+        movies.pop(title)
+        self.write_movies(movies)
+
+
+    def update_movie(self, title, rating):
+        movies = self.list_movies()
+        movies[title]["rating"] = rating
+        self.write_movies(movies)
+
+
