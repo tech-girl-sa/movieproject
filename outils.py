@@ -78,14 +78,19 @@ def get_worst_movies(movies):
 
 def map_html_element(movie_title, movie_info):
     year = movie_info["year"]
+    notes = movie_info["notes"]
+    rating = movie_info["rating"]
     if movie_info["poster"] and len(movie_info["poster"]) > 3:
         poster = movie_info["poster"]
     else:
         poster = "https://placehold.co/400x600?text=Missing+Photo&font=roboto"
     return f"""<li> 
                 <div class="movie">
-                <img class="movie-poster" src="{poster}">
+                <img class="movie-poster" title="{notes}" src="{poster}">
+                <div class="title-area">
                 <div class="movie-title">{movie_title}</div>
+                <span class="badge">{rating}</span>
+                </div>
                 <div class="movie-year">{year}</div>
                 </div> 
                </li>"""
