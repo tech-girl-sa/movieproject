@@ -24,7 +24,8 @@ class StorageJson(IStorage):
               "Titanic": {
                 "rating": 9,
                 "year": 1999,
-                "poster": link.png
+                "poster": link.png,
+                "notes":""
               },
               "..." {
                 ...
@@ -49,7 +50,8 @@ class StorageJson(IStorage):
         movies[title] = {
             "rating": rating,
             "year": year,
-            "poster": poster
+            "poster": poster,
+            "notes": ""
         }
         self.write_movies(movies)
 
@@ -64,14 +66,14 @@ class StorageJson(IStorage):
         movies.pop(title)
         self.write_movies(movies)
 
-    def update_movie(self, title, rating):
+    def update_movie(self, title, notes):
         """
             Updates a movie from the movies database.
             Loads the information from the JSON file, updates the movie,
             and saves it. The function doesn't need to validate the input.
         """
         movies = self.list_movies()
-        movies[title]["rating"] = rating
+        movies[title]["notes"] = notes
         self.write_movies(movies)
 
 

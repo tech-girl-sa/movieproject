@@ -13,7 +13,8 @@ class StorageCsv(IStorage):
             movie["Title"]: {
                 "rating": movie["Rating"],
                 "year": movie["Year"],
-                "poster": movie["Poster"]
+                "poster": movie["Poster"],
+                "notes" : movie["Notes"]
             } for movie in list_dicts
         }
         return mapped_data
@@ -21,7 +22,9 @@ class StorageCsv(IStorage):
 
     def map_to_write(self, dict_dicts):
         mapped_data = [{"Title": movie, "Rating": dict_dicts[movie]["rating"],
-                        "Year": dict_dicts[movie]["year"], "Poster": dict_dicts[movie]["poster"]}
+                        "Year": dict_dicts[movie]["year"], "Poster": dict_dicts[movie]["poster"],
+                        "Notes": dict_dicts[movie]["notes"]
+                        }
                        for movie in dict_dicts
                        ]
         return mapped_data
@@ -30,7 +33,7 @@ class StorageCsv(IStorage):
     def write_movies(self, movies):
         mapped_data = self.map_to_write(movies)
         with open(self.file_path, 'w', newline='') as csvfile:
-            fieldnames = ['Title', 'Rating', 'Year', "Poster"]
+            fieldnames = ['Title', 'Rating', 'Year', "Poster", "Notes"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(mapped_data)
@@ -45,7 +48,8 @@ class StorageCsv(IStorage):
           "Titanic": {
             "rating": 9,
             "year": 1999,
-            "poster": link.png
+            "poster": link.png,
+            "notes": ""
           },
           "..." {
             ...
@@ -68,6 +72,7 @@ class StorageCsv(IStorage):
             "rating": rating,
             "year": year,
             "poster": poster,
+            "notes": ""
         }
         self.write_movies(movies)
 
@@ -78,9 +83,9 @@ class StorageCsv(IStorage):
         self.write_movies(movies)
 
 
-    def update_movie(self, title, rating):
+    def update_movie(self, title, notes):
         movies = self.list_movies()
-        movies[title]["rating"] = rating
+        movies[title]["notes"] = notes
         self.write_movies(movies)
 
 

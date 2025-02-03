@@ -100,8 +100,8 @@ class MovieApp:
             if suggestions:
                 print(f"did you mean {suggestions[0][0]}")
             return
-        rating = input_rating()
-        self._storage.update_movie(movie, rating)
+        notes =  input("Enter movie notes")
+        self._storage.update_movie(movie, notes)
         print("Movie is updated successfully!")
 
 
