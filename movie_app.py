@@ -108,20 +108,26 @@ class MovieApp:
     def _command_movie_stats(self):
         """Displays average ratings, Median of the ratings, Best rated movie and Worst rated movie"""
         movies = self._storage.list_movies()
-        ratings = [movies[movie]["rating"] for movie in movies]
-        average = get_average(ratings)
-        median = get_median(ratings)
-        best_movies = "; ".join([f"{movie}, {rating}" for movie, rating in get_best_movies(movies)])
-        worst_movies = "; ".join([f"{movie}, {rating}" for movie, rating in get_worst_movies(movies)])
-        print(f"Average rating: {average}")
-        print(f"Median rating: {median}")
-        print(f"Best movie: {best_movies}")
-        print(f"Worst movie: {worst_movies}")
+        if movies:
+            ratings = [movies[movie]["rating"] for movie in movies]
+            average = get_average(ratings)
+            median = get_median(ratings)
+            best_movies = "; ".join([f"{movie}, {rating}" for movie, rating in get_best_movies(movies)])
+            worst_movies = "; ".join([f"{movie}, {rating}" for movie, rating in get_worst_movies(movies)])
+            print(f"Average rating: {average}")
+            print(f"Median rating: {median}")
+            print(f"Best movie: {best_movies}")
+            print(f"Worst movie: {worst_movies}")
+        else:
+            print("No movies stored, please add movies to get stats")
 
     def _command_random_movie(self):
         """Selects a random movie and displays it to the user"""
         movies = self._storage.list_movies()
-        random_movie = random.choice(list(movies.keys()))
+        try:
+            random_movie = random.choice(list(movies.keys()))
+        except IndexError:
+            print("No movies stored to choose from.")
         print(f"Your movie tonight: {random_movie}, it's rated {movies[random_movie]['rating']}")
 
 

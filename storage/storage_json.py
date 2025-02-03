@@ -7,6 +7,10 @@ class StorageJson(IStorage):
     def __init__(self, file_path):
         self.file_path = file_path
 
+    def write_movies(self, movies):
+        with open(self.file_path, "w") as file:
+            file.write(json.dumps(movies))
+
     def list_movies(self):
         """
             Returns a dictionary of dictionaries that
@@ -27,8 +31,12 @@ class StorageJson(IStorage):
               },
             }
             """
-        with open(self.file_path, "r") as file:
-            data = json.loads(file.read())
+        try:
+            with open(self.file_path, "r") as file:
+                data = json.loads(file.read())
+        except FileNotFoundError:
+            data = {}
+            self.write_movies()
         return data
 
     def add_movie(self, title, year, rating, poster=""):
@@ -43,8 +51,7 @@ class StorageJson(IStorage):
             "year": year,
             "poster": poster
         }
-        with open(self.file_path, "w") as file:
-            file.write(json.dumps(movies))
+        self.write_movies(movies)
 
     def delete_movie(self, title):
         """
@@ -55,8 +62,7 @@ class StorageJson(IStorage):
 
         movies = self.list_movies()
         movies.pop(title)
-        with open(self.file_path, "w") as file:
-            file.write(json.dumps(movies))
+        self.write_movies(movies)
 
     def update_movie(self, title, rating):
         """
@@ -66,7 +72,6 @@ class StorageJson(IStorage):
         """
         movies = self.list_movies()
         movies[title]["rating"] = rating
-        with open(self.file_path, "w") as file:
-            file.write(json.dumps(movies))
+        self.write_movies(movies)
 
 

@@ -52,9 +52,13 @@ class StorageCsv(IStorage):
           },
         }
         """
-        with open(self.file_path, "r") as file:
-            movies = list(csv.DictReader(file))
-        mapped_data = self.map_to_read(movies)
+        try:
+            with open(self.file_path, "r") as file:
+                movies = list(csv.DictReader(file))
+            mapped_data = self.map_to_read(movies)
+        except FileNotFoundError:
+            mapped_data = {}
+            self.write_movies(mapped_data)
         return mapped_data
 
 
