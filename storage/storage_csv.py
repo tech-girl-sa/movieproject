@@ -11,8 +11,8 @@ class StorageCsv(IStorage):
     def map_to_read(self, list_dicts):
         mapped_data = {
             movie["Title"]: {
-                "rating": movie["Rating"],
-                "year": movie["Year"],
+                "rating": float(movie["Rating"]),
+                "year": int(movie["Year"]),
                 "poster": movie["Poster"],
                 "notes" : movie["Notes"],
                 "imdb_id": movie["ImdbID"]
