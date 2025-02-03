@@ -1,7 +1,9 @@
 import random
 import matplotlib.pyplot as plt
+
+from omdb_api import OMDbApi, OMDbApiException
 from outils import input_rating, input_year, get_fuzz_suggestions, get_average, get_median, get_best_movies, \
-    get_worst_movies, get_movies_based_on_rating
+    get_worst_movies, get_movies_based_on_rating, input_data_manual_entry
 
 
 class MovieApp:
@@ -56,9 +58,21 @@ class MovieApp:
                 print(f"Movie {movie} already exists")
             if not movie:
                 print(f"Please enter a valid film name")
-        rating = input_rating()
-        year = input_year()
-        self._storage.add_movie(movie, year, rating)
+        poster = ""
+        try:
+            movie_info = OMDbApi.get_movie(movie)
+            rating = movie_info["rating"]
+            year = movie_info["year"]
+            poster = movie_info["poster"]
+        except OMDbApiException as e:
+            print(e)
+            user_input = input_data_manual_entry()
+            if user_input == "y":
+                rating = input_rating()
+                year = input_year()
+            else:
+                return
+        self._storage.add_movie(movie, year, rating, poster)
         print("Movie added successfully")
 
 
