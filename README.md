@@ -9,6 +9,8 @@ You can even generate your own website based on your favorite Films. Enjoy!!
 ## Installation
 
 To install this project, simply clone the repository and install the dependencies in requirements.txt using `pip`
+You need to add env file and specify  OMDbAPI_KEY variable using your api key from The OMDb API following 
+ [This Link](https://www.omdbapi.com/apikey.aspx)
 
 ## Usage
 
