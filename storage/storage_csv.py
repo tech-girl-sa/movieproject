@@ -26,7 +26,7 @@ class StorageCsv(IStorage):
         mapped_data = [{"Title": movie, "Rating": dict_dicts[movie]["rating"],
                         "Year": dict_dicts[movie]["year"], "Poster": dict_dicts[movie]["poster"],
                         "Notes": dict_dicts[movie]["notes"], "ImdbID": dict_dicts[movie]["imdb_id"],
-                        "Country": dict_dicts[movie]["notes"]
+                        "Country": dict_dicts[movie]["country"]
                         }
                        for movie in dict_dicts
                        ]
