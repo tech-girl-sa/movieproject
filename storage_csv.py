@@ -12,14 +12,16 @@ class StorageCsv(IStorage):
         mapped_data = {
             movie["Title"]: {
                 "rating": movie["Rating"],
-                "year": movie["Year"]
+                "year": movie["Year"],
+                "poster": movie["Poster"]
             } for movie in list_dicts
         }
         return mapped_data
 
 
     def map_to_write(self, dict_dicts):
-        mapped_data = [{"Title": movie, "Rating": dict_dicts[movie]["rating"], "Year": dict_dicts[movie]["year"]}
+        mapped_data = [{"Title": movie, "Rating": dict_dicts[movie]["rating"],
+                        "Year": dict_dicts[movie]["year"], "Poster": dict_dicts[movie]["poster"]}
                        for movie in dict_dicts
                        ]
         return mapped_data
@@ -28,7 +30,7 @@ class StorageCsv(IStorage):
     def write_movies(self, movies):
         mapped_data = self.map_to_write(movies)
         with open(self.file_path, 'w', newline='') as csvfile:
-            fieldnames = ['Title', 'Rating', 'Year']
+            fieldnames = ['Title', 'Rating', 'Year', "Poster"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(mapped_data)
@@ -42,7 +44,8 @@ class StorageCsv(IStorage):
         {
           "Titanic": {
             "rating": 9,
-            "year": 1999
+            "year": 1999,
+            "poster": link.png
           },
           "..." {
             ...
@@ -59,7 +62,8 @@ class StorageCsv(IStorage):
         movies = self.list_movies()
         movies[title] = {
             "rating": rating,
-            "year": year
+            "year": year,
+            "poster": poster,
         }
         self.write_movies(movies)
 

@@ -19,7 +19,8 @@ class StorageJson(IStorage):
             {
               "Titanic": {
                 "rating": 9,
-                "year": 1999
+                "year": 1999,
+                "poster": link.png
               },
               "..." {
                 ...
@@ -39,7 +40,8 @@ class StorageJson(IStorage):
         movies = self.list_movies()
         movies[title] = {
             "rating": rating,
-            "year": year
+            "year": year,
+            "poster": poster
         }
         with open(self.file_path, "w") as file:
             file.write(json.dumps(movies))

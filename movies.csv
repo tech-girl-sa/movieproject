@@ -1,11 +1,11 @@
-Title,Rating,Year
-Pulp Fiction,8.8,1994
-The Godfather,9.2,1972
-The Godfather: Part II,9.0,1974
-The Dark Knight,9.0,2008
-12 Angry Men,8.9,1957
-Everything Everywhere All At Once,8.9,2022
-Forrest Gump,8.8,1994
-Star Wars: Episode V,8.7,1980
-Gift,5.0,2000
-Last Movie,7.0,2001
+Title,Rating,Year,Poster
+Pulp Fiction,8.9,1994,https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg
+The Godfather,9.2,1972,https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_SX300.jpg
+The Godfather Part II,9.0,1974,https://m.media-amazon.com/images/M/MV5BNzc1OWY5MjktZDllMi00ZDEzLWEwMGItYjk1YmRhYjBjNTVlXkEyXkFqcGc@._V1_SX300.jpg
+The Dark Knight,9.0,2008,https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg
+12 Angry Men,9.0,1957,https://m.media-amazon.com/images/M/MV5BYjE4NzdmOTYtYjc5Yi00YzBiLWEzNDEtNTgxZGQ2MWVkN2NiXkEyXkFqcGc@._V1_SX300.jpg
+Everything Everywhere All at Once,7.8,2022,https://m.media-amazon.com/images/M/MV5BOWNmMzAzZmQtNDQ1NC00Nzk5LTkyMmUtNGI2N2NkOWM4MzEyXkEyXkFqcGc@._V1_SX300.jpg
+Forrest Gump,8.8,1994,https://m.media-amazon.com/images/M/MV5BNDYwNzVjMTItZmU5YS00YjQ5LTljYjgtMjY2NDVmYWMyNWFmXkEyXkFqcGc@._V1_SX300.jpg
+Star Wars: Episode V - The Empire Strikes Back,8.7,1980,https://m.media-amazon.com/images/M/MV5BMTkxNGFlNDktZmJkNC00MDdhLTg0MTEtZjZiYWI3MGE5NWIwXkEyXkFqcGc@._V1_SX300.jpg
+Gift,7.9,1993,https://m.media-amazon.com/images/M/MV5BNDAzOTRiYWEtYTU1NS00ZjYyLTkyNDktNWJjZTY2MDkxMTg4XkEyXkFqcGdeQXVyOTQxNTcxMTM@._V1_SX300.jpg
+Last Movie,8.0,2004,N/A
