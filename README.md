@@ -12,4 +12,7 @@ To install this project, simply clone the repository and install the dependencie
 
 ## Usage
 
-To use this project, run the following command - `python main.py`.
+To use this project, run the following command - `python main.py` if you want to use your own storage file instead
+of the default one you can add the file name as argument in your command like: `python main.py my_custom_file.json` 
+or  `python main.py my_custom_file.csv` we support two ways of storage using csv or json files. if you choose your file
+name without any extension your file will be by default a json file.
