@@ -41,9 +41,6 @@ class OMDbApi:
         except OMDbApiException as e:
             raise e
 
-
-
-
     @classmethod
     def get_rating_from_response(cls, response):
         if "imdbRating" in response:

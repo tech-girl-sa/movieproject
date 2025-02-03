@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 from omdb_api import OMDbApi, OMDbApiException
 from outils import input_rating, input_year, get_fuzz_suggestions, get_average, get_median, get_best_movies, \
-    get_worst_movies, get_movies_based_on_rating, input_data_manual_entry
+    get_worst_movies, get_movies_based_on_rating, input_data_manual_entry, generate_html_elements
 
 
 class MovieApp:
@@ -191,7 +191,15 @@ class MovieApp:
         print("Bye!")
 
     def _generate_website(self):
-        ...
+        movies = self._storage.list_movies()
+        html_elements = generate_html_elements(movies)
+        with open("static/index_template.html", "r") as handler:
+            original_html = handler.read()
+        final_html = original_html.replace( "__TEMPLATE_MOVIE_GRID__", html_elements)
+
+        with open("static/movies.html", "w") as handler:
+            handler.write(final_html)
+        print("\n Website generated successfully! \n")
 
     def run(self):
         print("********** My Movies Database **********")
