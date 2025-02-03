@@ -80,13 +80,20 @@ def map_html_element(movie_title, movie_info):
     year = movie_info["year"]
     notes = movie_info["notes"]
     rating = movie_info["rating"]
+    imdb_id = movie_info["imdb_id"]
     if movie_info["poster"] and len(movie_info["poster"]) > 3:
         poster = movie_info["poster"]
     else:
         poster = "https://placehold.co/400x600?text=Missing+Photo&font=roboto"
+    if imdb_id:
+        imdb_link=f"https://www.imdb.com/title/{imdb_id}/"
+    else:
+        imdb_link = "https://www.imdb.com"
     return f"""<li> 
                 <div class="movie">
+                <a href="{imdb_link}">
                 <img class="movie-poster" title="{notes}" src="{poster}">
+                </a>
                 <div class="title-area">
                 <div class="movie-title">{movie_title}</div>
                 <span class="badge">{rating}</span>

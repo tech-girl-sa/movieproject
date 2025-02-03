@@ -59,11 +59,13 @@ class MovieApp:
             if not movie:
                 print(f"Please enter a valid film name")
         poster = ""
+        imdb_id = ""
         try:
             movie_info = OMDbApi.get_movie(movie)
             rating = movie_info["rating"]
             year = movie_info["year"]
             poster = movie_info["poster"]
+            imdb_id = movie_info["imdb_id"]
         except OMDbApiException as e:
             print(e)
             user_input = input_data_manual_entry()
@@ -72,7 +74,7 @@ class MovieApp:
                 year = input_year()
             else:
                 return
-        self._storage.add_movie(movie, year, rating, poster)
+        self._storage.add_movie(movie, year, rating, poster, imdb_id)
         print("Movie added successfully")
 
 
@@ -100,7 +102,7 @@ class MovieApp:
             if suggestions:
                 print(f"did you mean {suggestions[0][0]}")
             return
-        notes =  input("Enter movie notes")
+        notes =  input("Enter movie notes: ")
         self._storage.update_movie(movie, notes)
         print("Movie is updated successfully!")
 

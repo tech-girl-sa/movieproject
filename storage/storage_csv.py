@@ -14,7 +14,8 @@ class StorageCsv(IStorage):
                 "rating": movie["Rating"],
                 "year": movie["Year"],
                 "poster": movie["Poster"],
-                "notes" : movie["Notes"]
+                "notes" : movie["Notes"],
+                "imdb_id": movie["ImdbID"]
             } for movie in list_dicts
         }
         return mapped_data
@@ -23,7 +24,7 @@ class StorageCsv(IStorage):
     def map_to_write(self, dict_dicts):
         mapped_data = [{"Title": movie, "Rating": dict_dicts[movie]["rating"],
                         "Year": dict_dicts[movie]["year"], "Poster": dict_dicts[movie]["poster"],
-                        "Notes": dict_dicts[movie]["notes"]
+                        "Notes": dict_dicts[movie]["notes"], "ImdbID": dict_dicts[movie]["imdb_id"]
                         }
                        for movie in dict_dicts
                        ]
@@ -33,7 +34,7 @@ class StorageCsv(IStorage):
     def write_movies(self, movies):
         mapped_data = self.map_to_write(movies)
         with open(self.file_path, 'w', newline='') as csvfile:
-            fieldnames = ['Title', 'Rating', 'Year', "Poster", "Notes"]
+            fieldnames = ['Title', 'Rating', 'Year', "Poster", "Notes", "ImdbID"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(mapped_data)
@@ -50,6 +51,7 @@ class StorageCsv(IStorage):
             "year": 1999,
             "poster": link.png,
             "notes": ""
+            "imdb_id": id
           },
           "..." {
             ...
@@ -66,13 +68,14 @@ class StorageCsv(IStorage):
         return mapped_data
 
 
-    def add_movie(self, title, year, rating, poster=""):
+    def add_movie(self, title, year, rating, poster="", imdb_id=""):
         movies = self.list_movies()
         movies[title] = {
             "rating": rating,
             "year": year,
             "poster": poster,
-            "notes": ""
+            "notes": "",
+            "imdb_id": imdb_id,
         }
         self.write_movies(movies)
 

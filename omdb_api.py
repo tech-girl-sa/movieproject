@@ -30,11 +30,14 @@ class OMDbApi:
                 rating = cls.get_rating_from_response(response)
                 year = response.get("Year", None)
                 poster = response.get("Poster", "")
+                imdb_id = response.get("imdbID", "")
+                print(title,imdb_id)
                 return {
                     "title": title,
                     "rating": rating,
                     "year": year,
-                    "poster":poster
+                    "poster":poster,
+                    "imdb_id": imdb_id
                 }
             else:
                raise  OMDbApiException("There was an issue fetching data from Api")

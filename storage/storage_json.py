@@ -25,7 +25,8 @@ class StorageJson(IStorage):
                 "rating": 9,
                 "year": 1999,
                 "poster": link.png,
-                "notes":""
+                "notes":"",
+                "imdb_id": id
               },
               "..." {
                 ...
@@ -40,7 +41,7 @@ class StorageJson(IStorage):
             self.write_movies()
         return data
 
-    def add_movie(self, title, year, rating, poster=""):
+    def add_movie(self, title, year, rating, poster="", imdb_id=""):
         """
             Adds a movie to the movies database.
             Loads the information from the JSON file, add the movie,
@@ -51,7 +52,8 @@ class StorageJson(IStorage):
             "rating": rating,
             "year": year,
             "poster": poster,
-            "notes": ""
+            "notes": "",
+            "imdb_id": imdb_id,
         }
         self.write_movies(movies)
 
