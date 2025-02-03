@@ -3,7 +3,7 @@ from storage_json import StorageJson
 
 
 def main():
-    storage = StorageJson('movies.json')
+    storage = StorageJson('data/movies.json')
     movie_app = MovieApp(storage)
     movie_app.run()
 
