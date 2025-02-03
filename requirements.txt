@@ -2,3 +2,5 @@ matplotlib
 thefuzz
 python-dotenv
 requests
+pycountry
+emoji-country-flag

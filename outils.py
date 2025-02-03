@@ -1,3 +1,6 @@
+import flag
+import pycountry
+from pycountry.db import Country
 from thefuzz import process
 
 def input_rating(prompt_message="Enter the movie's rating: ", allow_blank = False):
@@ -76,11 +79,28 @@ def get_worst_movies(movies):
     return get_movies_based_on_rating(worst_rating, movies)
 
 
+def get_country_flag_emoji(country:Country):
+    if country:
+        flags=""
+        try:
+            countries = country.split(",")
+            for country in countries:
+                country_obj = pycountry.countries.search_fuzzy(country)[0]
+                country_code = country_obj.alpha_2
+                flags += flag.flag(country_code)
+            return flags
+        except Exception:
+            return ""
+    else:
+        return ""
+
+
 def map_html_element(movie_title, movie_info):
     year = movie_info["year"]
     notes = movie_info["notes"]
     rating = movie_info["rating"]
     imdb_id = movie_info["imdb_id"]
+    country = movie_info["country"]
     if movie_info["poster"] and len(movie_info["poster"]) > 3:
         poster = movie_info["poster"]
     else:
@@ -89,6 +109,7 @@ def map_html_element(movie_title, movie_info):
         imdb_link=f"https://www.imdb.com/title/{imdb_id}/"
     else:
         imdb_link = "https://www.imdb.com"
+    country_flag = get_country_flag_emoji(country)
     return f"""<li> 
                 <div class="movie">
                 <a href="{imdb_link}">
@@ -98,7 +119,7 @@ def map_html_element(movie_title, movie_info):
                 <div class="movie-title">{movie_title}</div>
                 <span class="badge">{rating}</span>
                 </div>
-                <div class="movie-year">{year}</div>
+                <div class="movie-year"><span class="flags">{country_flag}</span> {year}</div>
                 </div> 
                </li>"""
 

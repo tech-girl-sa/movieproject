@@ -31,13 +31,14 @@ class OMDbApi:
                 year = response.get("Year", None)
                 poster = response.get("Poster", "")
                 imdb_id = response.get("imdbID", "")
-                print(title,imdb_id)
+                country = response.get("Country", "")
                 return {
                     "title": title,
                     "rating": rating,
                     "year": year,
                     "poster":poster,
-                    "imdb_id": imdb_id
+                    "imdb_id": imdb_id,
+                    "country": country
                 }
             else:
                raise  OMDbApiException("There was an issue fetching data from Api")
@@ -50,5 +51,4 @@ class OMDbApi:
             return response["imdbRating"]
         elif "Ratings" in response and len(response["Ratings"])>0:
             return response["Ratings"][0].get("Value", None)
-
 

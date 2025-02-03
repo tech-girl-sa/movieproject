@@ -60,12 +60,14 @@ class MovieApp:
                 print(f"Please enter a valid film name")
         poster = ""
         imdb_id = ""
+        country= ""
         try:
             movie_info = OMDbApi.get_movie(movie)
             rating = movie_info["rating"]
             year = movie_info["year"]
             poster = movie_info["poster"]
             imdb_id = movie_info["imdb_id"]
+            country = movie_info["country"]
         except OMDbApiException as e:
             print(e)
             user_input = input_data_manual_entry()
@@ -74,7 +76,7 @@ class MovieApp:
                 year = input_year()
             else:
                 return
-        self._storage.add_movie(movie, year, rating, poster, imdb_id)
+        self._storage.add_movie(movie, year, rating, poster, imdb_id, country)
         print("Movie added successfully")
 
 
@@ -205,7 +207,7 @@ class MovieApp:
             original_html = handler.read()
         final_html = original_html.replace( "__TEMPLATE_MOVIE_GRID__", html_elements)
 
-        with open("static/movies.html", "w") as handler:
+        with open("static/movies.html", "w", encoding="utf-8") as handler:
             handler.write(final_html)
         print("\n Website generated successfully! \n")
 
