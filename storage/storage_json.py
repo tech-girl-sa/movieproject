@@ -55,6 +55,7 @@ class StorageJson(IStorage):
             "poster": poster,
             "notes": "",
             "imdb_id": imdb_id,
+            "country": country
         }
         self.write_movies(movies)
 
