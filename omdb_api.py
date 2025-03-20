@@ -28,7 +28,10 @@ class OMDbApi:
             elif "Title" in response:
                 title =  response["Title"]
                 rating = cls.get_rating_from_response(response)
-                year = response.get("Year", None)
+                try:
+                    year = int(response.get("Year", None))
+                except:
+                    year = None
                 poster = response.get("Poster", "")
                 imdb_id = response.get("imdbID", "")
                 country = response.get("Country", "")
@@ -47,8 +50,11 @@ class OMDbApi:
 
     @classmethod
     def get_rating_from_response(cls, response):
-        if "imdbRating" in response:
-            return response["imdbRating"]
-        elif "Ratings" in response and len(response["Ratings"])>0:
-            return response["Ratings"][0].get("Value", None)
+        try:
+            if "imdbRating" in response:
+                return float(response["imdbRating"])
+            elif "Ratings" in response and len(response["Ratings"])>0:
+                return float(response["Ratings"][0].get("Value", None))
+        except:
+            return None
 
